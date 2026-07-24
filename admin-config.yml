@@ -1,0 +1,37 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "products"
+    label: "Products"
+    files:
+      - name: "products"
+        label: "All Products"
+        file: "data/products.json"
+        description: "Add, edit, or remove products shown on the website. Each product needs a category so it appears in the right section."
+        fields:
+          - label: "Products"
+            name: "products"
+            widget: "list"
+            label_singular: "Product"
+            summary: "{{title}} — {{category}}"
+            fields:
+              - { label: "Product Name", name: "title", widget: "string" }
+              - label: "Category"
+                name: "category"
+                widget: "select"
+                options:
+                  - { label: "Couvres-lit", value: "couvres-lit" }
+                  - { label: "Couvertures", value: "couvertures" }
+                  - { label: "Draps", value: "draps" }
+                  - { label: "Tapis", value: "tapis" }
+                  - { label: "Rideaux", value: "rideaux" }
+                  - { label: "Serviettes", value: "serviettes" }
+              - { label: "Price (e.g. 349 MAD)", name: "price", widget: "string" }
+              - { label: "Photo", name: "image", widget: "image" }
+              - { label: "Colors Available (e.g. Beige, Rose, Gris)", name: "colors", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text", required: false }
