@@ -32,6 +32,9 @@ collections:
                   - { label: "Rideaux", value: "rideaux" }
                   - { label: "Serviettes", value: "serviettes" }
               - { label: "Price (e.g. 349 MAD)", name: "price", widget: "string" }
-              - { label: "Photo", name: "image", widget: "image" }
+              - label: "Photos (add as many as you want)"
+                name: "images"
+                widget: "list"
+                field: { label: "Photo", name: "src", widget: "image" }
               - { label: "Colors Available (e.g. Beige, Rose, Gris)", name: "colors", widget: "string", required: false }
               - { label: "Description", name: "description", widget: "text", required: false }
