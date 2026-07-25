@@ -212,34 +212,87 @@
     overflow:hidden;
     box-shadow:0 14px 30px -22px rgba(61,50,39,0.35);
     transition:transform .2s ease, box-shadow .2s ease;
+    cursor:pointer;
   }
   .cat-section.alt .product-card{background:var(--nude);}
   .product-card:hover{transform:translateY(-3px); box-shadow:0 20px 38px -22px rgba(61,50,39,0.4);}
   .product-card .p-img{
     aspect-ratio:1/1; overflow:hidden; background:var(--nude-deep);
+  }
+  .product-card .p-img img{width:100%; height:100%; object-fit:cover;}
+  .product-card .p-body{padding:14px 16px 18px; text-align:center;}
+  .product-card h4{font-size:15.5px; font-weight:600; font-family:'Fraunces',serif; margin-bottom:4px;}
+  .product-card .p-price{font-size:14.5px; font-weight:600; color:var(--taupe-deep);}
+
+  /* ---------- product detail modal ---------- */
+  .modal-overlay{
+    display:none;
+    position:fixed; inset:0; z-index:200;
+    background:rgba(61,50,39,0.6);
+    backdrop-filter:blur(3px);
+    align-items:center; justify-content:center;
+    padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:var(--ivory);
+    border-radius:10px;
+    max-width:520px; width:100%;
+    max-height:88vh;
+    overflow-y:auto;
     position:relative;
   }
-  .product-card .p-img-track{
+  .modal-close{
+    position:absolute; top:12px; right:12px; z-index:2;
+    width:34px; height:34px; border-radius:50%;
+    background:rgba(251,248,243,0.9);
+    border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 16px rgba(61,50,39,0.25);
+  }
+  .modal-close svg{width:18px; height:18px; color:var(--espresso);}
+  .modal-gallery{
+    position:relative;
+    aspect-ratio:1/1;
+    background:var(--nude-deep);
+  }
+  .modal-gallery-track{
     display:flex; height:100%; overflow-x:auto; scroll-snap-type:x mandatory;
     scrollbar-width:none;
   }
-  .product-card .p-img-track::-webkit-scrollbar{display:none;}
-  .product-card .p-img-track img{
+  .modal-gallery-track::-webkit-scrollbar{display:none;}
+  .modal-gallery-track img{
     flex:0 0 100%; width:100%; height:100%; object-fit:cover; scroll-snap-align:start;
   }
-  .product-card .p-img-dots{
-    position:absolute; bottom:8px; left:50%; transform:translateX(-50%);
-    display:flex; gap:4px; pointer-events:none;
+  .modal-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:36px; height:36px; border-radius:50%;
+    background:rgba(251,248,243,0.88);
+    border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    z-index:2;
   }
-  .product-card .p-img-dots span{
-    width:5px; height:5px; border-radius:50%; background:rgba(251,248,243,0.85);
-    box-shadow:0 0 0 1px rgba(61,50,39,0.25);
+  .modal-arrow.prev{left:12px;} .modal-arrow.next{right:12px;}
+  .modal-arrow svg{width:16px; height:16px; color:var(--espresso);}
+  .modal-dots{
+    position:absolute; bottom:10px; left:50%; transform:translateX(-50%);
+    display:flex; gap:5px;
   }
-  .product-card .p-body{padding:16px 18px 20px;}
-  .product-card h4{font-size:16px; font-weight:600; font-family:'Fraunces',serif; margin-bottom:4px;}
-  .product-card .p-price{font-size:15px; font-weight:600; color:var(--taupe-deep); margin-bottom:6px;}
-  .product-card .p-desc{font-size:13px; opacity:0.68; line-height:1.5; margin-bottom:8px;}
-  .product-card .p-colors{font-size:12px; opacity:0.6; text-transform:uppercase; letter-spacing:0.04em;}
+  .modal-dots span{width:6px; height:6px; border-radius:50%; background:rgba(251,248,243,0.85); box-shadow:0 0 0 1px rgba(61,50,39,0.25);}
+  .modal-body{padding:22px 24px 26px;}
+  .modal-body h3{font-size:22px; margin-bottom:6px;}
+  .modal-price{font-size:17px; font-weight:600; color:var(--taupe-deep); margin-bottom:14px;}
+  .modal-desc{font-size:14.5px; line-height:1.65; opacity:0.78; margin-bottom:12px;}
+  .modal-colors{font-size:12.5px; text-transform:uppercase; letter-spacing:0.05em; opacity:0.6; margin-bottom:20px;}
+  .modal-whatsapp{
+    display:flex; align-items:center; justify-content:center; gap:9px;
+    width:100%; padding:14px; border-radius:3px;
+    background:#3E5C4A; color:var(--ivory);
+    font-weight:600; font-size:15px;
+    transition:background .18s ease;
+  }
+  .modal-whatsapp:hover{background:#33493c;}
+  .modal-whatsapp svg{width:18px; height:18px;}
   .empty-state{
     grid-column:1/-1;
     text-align:center;
@@ -436,35 +489,61 @@
   <div class="wrap">© 2026 Yasiz Gadgets. All items sold via WhatsApp, Instagram &amp; Facebook.</div>
 </footer>
 
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-gallery">
+      <div class="modal-gallery-track" id="modalGalleryTrack"></div>
+      <button class="modal-arrow prev" id="modalPrev" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="modal-arrow next" id="modalNext" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <div class="modal-dots" id="modalDots"></div>
+    </div>
+    <div class="modal-body">
+      <h3 id="modalTitle"></h3>
+      <div class="modal-price" id="modalPrice"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-colors" id="modalColors"></div>
+      <a class="modal-whatsapp" id="modalWhatsapp" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.02c-.24.68-1.4 1.3-1.93 1.38-.49.08-1.11.11-1.79-.11-.41-.13-.94-.31-1.62-.6-2.85-1.23-4.71-4.1-4.85-4.29-.14-.19-1.16-1.54-1.16-2.94s.73-2.09.99-2.37c.26-.28.56-.35.75-.35l.54.01c.17.01.4-.06.63.48.24.56.8 1.96.87 2.1.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.16-.29.36-.42.49-.14.14-.28.29-.12.57.16.28.71 1.18 1.53 1.91 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.6-.07.16-.19.68-.79.87-1.07.19-.28.37-.23.63-.14.26.09 1.65.78 1.94.92.28.14.47.21.54.33.07.12.07.68-.17 1.36z"/></svg>
+        Commander sur WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
 <script>
   function escapeHtml(str){
     if(!str) return '';
     return str.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   }
 
-  function renderGallery(p){
-    const imgs = (p.images && p.images.length ? p.images.map(i => i.src) : (p.image ? [p.image] : [])).filter(Boolean);
-    if(imgs.length === 0) return '';
-    const imgTags = imgs.map(src => `<img src="${escapeHtml(src)}" alt="${escapeHtml(p.title||'')}">`).join('');
-    const dots = imgs.length > 1 ? `<div class="p-img-dots">${imgs.map(()=>'<span></span>').join('')}</div>` : '';
-    return `<div class="p-img-track">${imgTags}</div>${dots}`;
+  function getImages(p){
+    return (p.images && p.images.length ? p.images.map(i => i.src) : (p.image ? [p.image] : [])).filter(Boolean);
   }
 
   let allProducts = [];
   let activeCategory = null;
 
   function renderProductCards(items){
-    return items.map(p => `
-      <div class="product-card">
-        <div class="p-img">${renderGallery(p)}</div>
-        <div class="p-body">
-          <h4>${escapeHtml(p.title||'')}</h4>
-          ${p.price ? `<div class="p-price">${escapeHtml(p.price)}</div>` : ''}
-          ${p.description ? `<div class="p-desc">${escapeHtml(p.description)}</div>` : ''}
-          ${p.colors ? `<div class="p-colors">${escapeHtml(p.colors)}</div>` : ''}
+    return items.map(p => {
+      const imgs = getImages(p);
+      const cover = imgs[0] || '';
+      return `
+        <div class="product-card" data-idx="${p.__idx}">
+          <div class="p-img">${cover ? `<img src="${escapeHtml(cover)}" alt="${escapeHtml(p.title||'')}">` : ''}</div>
+          <div class="p-body">
+            <h4>${escapeHtml(p.title||'')}</h4>
+            ${p.price ? `<div class="p-price">${escapeHtml(p.price)}</div>` : ''}
+          </div>
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
   }
 
   function showCategory(cat, label){
@@ -488,6 +567,10 @@
     grid.innerHTML = items.length ? renderProductCards(items) : '<div class="empty-state">Products coming soon — check back shortly.</div>';
     reveal.hidden = false;
     reveal.scrollIntoView({behavior:'smooth', block:'start'});
+
+    grid.querySelectorAll('.product-card').forEach(card => {
+      card.addEventListener('click', () => openModal(parseInt(card.getAttribute('data-idx'), 10)));
+    });
   }
 
   document.querySelectorAll('.cat-card').forEach(card => {
@@ -496,9 +579,60 @@
     });
   });
 
+  /* ---------- product detail modal ---------- */
+  const overlay = document.getElementById('modalOverlay');
+  const galleryTrack = document.getElementById('modalGalleryTrack');
+  const galleryDots = document.getElementById('modalDots');
+  let modalImgCount = 0;
+
+  function openModal(idx){
+    const p = allProducts[idx];
+    if(!p) return;
+    const imgs = getImages(p);
+    modalImgCount = imgs.length;
+
+    galleryTrack.innerHTML = imgs.map(src => `<img src="${escapeHtml(src)}" alt="${escapeHtml(p.title||'')}">`).join('');
+    galleryDots.innerHTML = imgs.length > 1 ? imgs.map(()=>'<span></span>').join('') : '';
+    document.getElementById('modalPrev').style.display = imgs.length > 1 ? 'flex' : 'none';
+    document.getElementById('modalNext').style.display = imgs.length > 1 ? 'flex' : 'none';
+
+    document.getElementById('modalTitle').textContent = p.title || '';
+    document.getElementById('modalPrice').textContent = p.price || '';
+    document.getElementById('modalDesc').textContent = p.description || '';
+    document.getElementById('modalDesc').style.display = p.description ? 'block' : 'none';
+    document.getElementById('modalColors').textContent = p.colors ? ('Couleurs : ' + p.colors) : '';
+    document.getElementById('modalColors').style.display = p.colors ? 'block' : 'none';
+
+    const msg = encodeURIComponent(`Bonjour, je suis intéressé(e) par : ${p.title || ''}${p.price ? ' - ' + p.price : ''}`);
+    document.getElementById('modalWhatsapp').href = `https://wa.me/212707746853?text=${msg}`;
+
+    galleryTrack.scrollTo({left:0});
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+  document.getElementById('modalPrev').addEventListener('click', () => {
+    galleryTrack.scrollBy({left: -galleryTrack.clientWidth, behavior:'smooth'});
+  });
+  document.getElementById('modalNext').addEventListener('click', () => {
+    galleryTrack.scrollBy({left: galleryTrack.clientWidth, behavior:'smooth'});
+  });
+
   fetch('/data/products.json', {cache:'no-store'})
     .then(r => r.ok ? r.json() : {products:[]})
-    .then(data => { allProducts = (data && data.products) || []; })
+    .then(data => {
+      allProducts = (data && data.products) || [];
+      allProducts.forEach((p, i) => { p.__idx = i; });
+    })
     .catch(() => { allProducts = []; });
 </script>
 
