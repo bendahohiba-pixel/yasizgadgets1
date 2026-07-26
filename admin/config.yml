@@ -12,7 +12,7 @@ collections:
       - name: "products"
         label: "All Products"
         file: "data/products.json"
-        description: "Add, edit, or remove products shown on the website. Each product needs a category so it appears in the right section."
+        description: "Add, edit, or remove products shown on the website. Only fill in the fields that apply to this product — leave Sizes/Dimensions blank if not relevant, for example."
         fields:
           - label: "Products"
             name: "products"
@@ -35,6 +35,22 @@ collections:
               - label: "Photos (add as many as you want)"
                 name: "images"
                 widget: "list"
-                field: { label: "Photo", name: "src", widget: "image" }
-              - { label: "Colors Available (e.g. Beige, Rose, Gris)", name: "colors", widget: "string", required: false }
-              - { label: "Description", name: "description", widget: "text", required: false }
+                fields:
+                  - { label: "Photo", name: "src", widget: "image" }
+              - { label: "Short Description (shown on the product card)", name: "short_description", widget: "string", required: false }
+              - { label: "Full Description", name: "description", widget: "text", required: false }
+              - label: "Colors Available (add one at a time, leave empty if none)"
+                name: "colors"
+                widget: "list"
+                required: false
+                field: { label: "Color", name: "value", widget: "string" }
+              - label: "Sizes Available (add one at a time, leave empty if none)"
+                name: "sizes"
+                widget: "list"
+                required: false
+                field: { label: "Size", name: "value", widget: "string" }
+              - { label: "Dimensions (e.g. 150 x 200 cm — leave empty if not applicable)", name: "dimensions", widget: "string", required: false }
+              - { label: "Stock quantity (optional, leave empty to hide)", name: "stock", widget: "number", required: false, value_type: "int" }
+              - { label: "Mark as Featured", name: "featured", widget: "boolean", required: false, default: false }
+              - { label: "Mark as New", name: "is_new", widget: "boolean", required: false, default: false }
+              - { label: "Mark as On Sale", name: "on_sale", widget: "boolean", required: false, default: false }
