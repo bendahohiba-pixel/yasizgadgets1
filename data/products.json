@@ -1,3 +1,39 @@
 {
-  "products": []
+  "products": [
+    {
+      "on_sale": false,
+      "price": "280 MAD",
+      "is_new": false,
+      "dimensions": "150/200",
+      "featured": false,
+      "colors": [
+        "Marron",
+        "Beige",
+        "Saumon",
+        "Gris Foncé",
+        "Moutard"
+      ],
+      "sizes": [],
+      "title": "Tapis Moderne Relief 🤎",
+      "images": [
+        {
+          "src": "/images/uploads/whatsapp-image-2026-07-25-at-21.41.17-1-.jpeg"
+        },
+        {
+          "src": "/images/uploads/whatsapp-image-2026-07-25-at-21.41.17.jpeg"
+        },
+        {
+          "src": "/images/uploads/whatsapp-image-2026-07-25-at-21.41.18-1-.jpeg"
+        },
+        {
+          "src": "/images/uploads/whatsapp-image-2026-07-25-at-21.41.18-2-.jpeg"
+        },
+        {
+          "src": "/images/uploads/whatsapp-image-2026-07-25-at-21.41.18.jpeg"
+        }
+      ],
+      "description": "Tapis Moderne Relief 🤎\n\nApportez une touche d’élégance et de confort à votre intérieur avec ce tapis au design moderne et à la texture ultra douce.\n\n* 📏 Dimensions : 150 × 200 cm\n* 🎨 Disponible en 5 couleurs : Marron, Gris foncé, Beige, Saumon et Moutarde.\n* 💰 Prix : 280 DH\n\n🚚 Livraison Gratuite\n💵 Paiement à la livraison",
+      "category": "tapis"
+    }
+  ]
 }
