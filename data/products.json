@@ -34,6 +34,48 @@
       ],
       "description": "Tapis Moderne Relief 🤎\n\nApportez une touche d’élégance et de confort à votre intérieur avec ce tapis au design moderne et à la texture ultra douce.\n\n* 📏 Dimensions : 150 × 200 cm\n* 🎨 Disponible en 5 couleurs : Marron, Gris foncé, Beige, Saumon et Moutarde.\n* 💰 Prix : 280 DH\n\n🚚 Livraison Gratuite\n💵 Paiement à la livraison",
       "category": "tapis"
+    },
+    {
+      "on_sale": false,
+      "price": "250 MAD",
+      "is_new": false,
+      "dimensions": "150/100",
+      "featured": false,
+      "title": "    Tapis Chambre Enfant",
+      "images": [
+        {
+          "src": "/images/uploads/img_2855.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2846.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2844.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2847.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2852.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2843.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2845.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2849.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2843.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2856.jpeg"
+        }
+      ],
+      "description": "Ajoutez une touche de douceur à la chambre de votre enfant avec nos tapis confortables et décoratifs.\n\n📏 Dimension : 150 × 100 cm\n💰 Prix : 250 DH\n\n🚚 Livraison gratuite partout au Maroc",
+      "category": "tapis"
     }
   ]
 }
