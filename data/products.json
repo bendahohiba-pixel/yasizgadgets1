@@ -76,6 +76,45 @@
       ],
       "description": "Ajoutez une touche de douceur à la chambre de votre enfant avec nos tapis confortables et décoratifs.\n\n📏 Dimension : 150 × 100 cm\n💰 Prix : 250 DH\n\n🚚 Livraison gratuite partout au Maroc",
       "category": "tapis"
+    },
+    {
+      "on_sale": false,
+      "price": "350 MAD",
+      "is_new": false,
+      "dimensions": "200/140",
+      "featured": false,
+      "title": "✨ Tapis de Salon Ovale Anti-Tache – Élégance & Confort ✨",
+      "images": [
+        {
+          "src": "/images/uploads/img_2765.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2766.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2767.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2768.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2769.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2770.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2771.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2772.jpeg"
+        },
+        {
+          "src": "/images/uploads/img_2773.jpeg"
+        }
+      ],
+      "description": "✨ Tapis de Salon Ovale Anti-Tache – Élégance & Confort ✨\n\nApportez une touche de raffinement à votre salon avec ce tapis ovale au design classique et intemporel. Grâce à son revêtement anti-tache, il est facile à entretenir et reste impeccable au quotidien. Sa texture douce et sa finition élégante en font le choix idéal pour sublimer votre intérieur.\n\n📏 Dimension : 140 × 200 cm\n💰 Prix : 350 DH\n\n🚚 Livraison gratuite partout au Maroc. Commandez dès maintenant et offrez à votre salon une décoration chic et accueillante.",
+      "category": "tapis"
     }
   ]
 }
